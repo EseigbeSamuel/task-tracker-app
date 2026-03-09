@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Task } from "../types/task";
 import { loadTasks, saveTasks } from "../storage/taskStorage";
-import { v4 as uuid } from "uuid";
+
+const generateId = () => `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
 export function useTasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -16,7 +17,7 @@ export function useTasks() {
 
   const addTask = (title: string) => {
     const newTask: Task = {
-      id: uuid(),
+      id: generateId(),
       title,
       completed: false,
     };
